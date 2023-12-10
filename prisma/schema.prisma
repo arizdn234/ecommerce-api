@@ -11,18 +11,48 @@ datasource db {
 }
 
 model User {
-  id    Int     @default(autoincrement()) @id
-  name  String?
-  email String  @unique
-  posts Post[]
+  id       Int      @id @default(autoincrement())
+  username String
+  email    String   @unique
+  password String
+
+  // Relationship reff
+  orders   Order[]
 }
 
-// Define the `Post` table in the database
-model Post {
-  id        Int      @default(autoincrement()) @id
-  published Boolean? @default(false)
-  title     String
-  content   String?
-  author    User?    @relation(fields: [authorId], references: [id])
-  authorId  Int? 
+model Product {
+  id          Int      @id @default(autoincrement())
+  name        String
+  price       Float
+  description String
+
+  // Relationship reff
+  orderItems  OrderItem[]
+}
+
+model Order {
+  id          Int      @id @default(autoincrement())
+  userId      Int
+  totalAmount Float
+  status      String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relationships
+  user        User     @relation(fields: [userId], references: [id])
+
+  // Relationship reff
+  orderItems  OrderItem[]
+}
+
+model OrderItem {
+  id         Int     @id @default(autoincrement())
+  orderId    Int
+  productId  Int
+  quantity   Int
+  subtotal   Float
+  
+  // Relationships
+  order      Order   @relation(fields: [orderId], references: [id])
+  product    Product @relation(fields: [productId], references: [id])
 }
