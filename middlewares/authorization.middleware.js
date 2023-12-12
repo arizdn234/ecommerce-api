@@ -1,5 +1,6 @@
+const { PrismaClient } = require("@prisma/client");
 const { verifyToken } = require("../helpers/jwt.helper")
-const { User } = require("../models");
+const User = new PrismaClient().user
 
 class Authorization {
     static async authorizationCustomer(req, res, next) {
@@ -14,7 +15,7 @@ class Authorization {
                 throw { status: 401, message: 'Authorization failed' }
             }
 
-            const user = await User.findOne({ where: { email: decoded.email } })
+            const user = await User.findUnique({ where: { email: decoded.email } })
             if (!user) {
                 throw { status: 401, message: 'Authorization failed'}
             }
@@ -41,7 +42,7 @@ class Authorization {
                 throw { status: 401, message: 'Authorization failed' }
             }
 
-            const user = await User.findOne({ where: { email: decoded.email } })
+            const user = await User.findUnique({ where: { email: decoded.email } })
             if (!user) {
                 throw { status: 401, message: 'Authorization failed'}
             }
