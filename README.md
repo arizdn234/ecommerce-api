@@ -1,5 +1,6 @@
 
 # Back-end e-commerce sederhana menggunakan Node.js, Prisma, Express, dan PostgreSQL.
+Studi kasus aplikasi e-commerce B2C (Business-to-Consumer) dapat mencakup berbagai aspek, termasuk manajemen produk, data pengguna, otentikasi pengguna, keranjang belanja, pemrosesan pembayaran, dan lainnya.
 
 ## Instalasi
 
@@ -41,39 +42,56 @@
    npm start
    ```
 
-Aplikasi akan berjalan di `http://localhost:3000`.
+Aplikasi akan berjalan di `http://localhost:3000`. Bisa dirubah sesuai port yang tersedia pada variabel PORT = 3000 file index.js 
 
 ## Endpoint API
 
 Berikut adalah beberapa endpoint API yang tersedia:
 
-- **Pengelolaan Produk:**
-  - `GET /products`
-  - `GET /products/:id`
-  - `POST /products`
-  - `PUT /products/:id`
-  - `DELETE /products/:id`
+### **Sistem Login**
+| Method | Path | Response |
+| --- | --- | --- |
+| POST | `/user/register` | User account register. |
+| POST | `/user/login` | User account login. |
 
-- **Pengelolaan Pengguna:**
-  - `POST /signup`
-  - `POST /login`
-  - `GET /users/:id`
-  - `PUT /users/:id`
+### **Pengelolaan Produk:**
+| Method | Path | Response | Auth |
+| --- | --- | --- | --- |
+| GET | `/api/products` | Get semua data produk | - |
+| GET | `/api/products/:id` | Get produk berdasarkan ID | - |
+| POST | `/api/products` | Create produk | admin |
+| PUT | `/api/products/:id` | Update produk | admin |
+| DELETE | `/api/products/:id` | Delete produk | admin |
 
-- **Pengelolaan Pesanan:**
+### **Pengelolaan Pengguna:**
+| Method | Path | Response | Auth |
+| --- | --- | --- | --- |
+| GET | `/api/admin/users` | Get semua data pengguna | admin |
+| GET | `/api/users/:id` | Get pengguna berdasarkan ID | customer |
+| GET | `/api/admin/users/:id` | Get pengguna berdasarkan ID | admin |
+| POST | `/api/admin/users` | Create pengguna | admin |
+| PUT | `/api/users/:id` | Update pengguna | customer |
+| PUT | `/api/admin/users/:id` | Update pengguna | admin |
+| DELETE | `/api/admin/users/:id` | Delete pengguna | admin |
+
+### **Pengelolaan Pesanan:**
+under maintaince
   - `POST /orders`
   - `GET /orders/:id`
   - `GET /orders/user/:userId`
   - `PUT /orders/:id`
 
-- **Pembayaran:**
+### **Pembayaran:**
+under maintaince
   - `POST /payment`
 
-- **Pencarian dan Filter:**
+### **Pencarian dan Filter:**
+under maintaince
   - `GET /search?q=:query`
   - `GET /products/category/:category`
 
-- **Manajemen Keranjang Belanja:**
+### **Manajemen Keranjang Belanja:**
+under maintaince
   - `GET /cart`
   - `POST /cart/add`
   - `PUT /cart/update/:productId`
