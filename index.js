@@ -9,5 +9,16 @@ app.use(express.urlencoded())
 app.use(router);
 
 app.listen(PORT, () => {
-  console.log(`App listening on port http://localhost:${PORT}`)
+	console.log(`App listening on port http://localhost:${PORT}`)
 })
+
+const loginCredentials = [
+	{
+		"email": "arzhed@admin.com",
+		"password": "admin17"
+	},
+	{
+		"email": "see on db",
+    	"password": "akusayangkamu"
+	}
+]
