@@ -1,10 +1,10 @@
 const { PrismaClient } = require("@prisma/client")
-const prisma = new PrismaClient()
+const Product = new PrismaClient().product
 
 class productController {
     static async getAllProducts (req, res) {
         try {
-            const products = await prisma.product.findMany()
+            const products = await Product.findMany()
             res.status(200).json({
                 status: 'success',
                 data: products
@@ -20,7 +20,7 @@ class productController {
     static async createProduct (req, res) {
         try {
             const { name, price, description } = req.body
-            const product = await prisma.product.create({ 
+            const product = await Product.create({ 
                 data: {
                     name,
                     price,
@@ -42,7 +42,7 @@ class productController {
     static async getProductByID (req, res) {
         try {
             const productID = req.params.id
-            const product = await prisma.product.findUnique({ 
+            const product = await Product.findUnique({ 
                 where: { 
                     id: parseInt(productID) 
                 } 
@@ -70,14 +70,14 @@ class productController {
     static async updateProductByID (req, res) {
         try {
             const productID = req.params.id
-            if (!await prisma.product.findUnique({ where: { id: parseInt(productID) }})) {
+            if (!await Product.findUnique({ where: { id: parseInt(productID) }})) {
                 return res.status(404).json({
                     status: 'failed',
                     message: 'Product not found'
                 })
             }
             const { name, price, description } = req.body
-            const product = await prisma.product.update({ 
+            const product = await Product.update({ 
                 where: { 
                     id: parseInt(productID) 
                 },
@@ -103,13 +103,13 @@ class productController {
     static async deleteProductByID (req, res) {
         try {
             const productID = req.params.id
-            if (!await prisma.product.findUnique({ where: { id: parseInt(productID) }})) {
+            if (!await Product.findUnique({ where: { id: parseInt(productID) }})) {
                 return res.status(404).json({
                     status: 'failed',
                     message: 'Product not found'
                 })
             }
-            const deletedProduct = await prisma.product.delete({
+            const deletedProduct = await Product.delete({
                 where: { id: parseInt(productID) },
             })
 
