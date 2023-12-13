@@ -6,7 +6,9 @@ class PaymentController {
     try {
       const { orderId, amount, paymentMethod } = req.body;
 
+      // *note
       // Perform the payment processing here.
+      // Assuming the payment was approved
 
       const paymentResult = {
         status: 'success',
