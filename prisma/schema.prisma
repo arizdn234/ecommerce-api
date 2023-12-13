@@ -19,27 +19,39 @@ model User {
 
   // Relationship reff
   orders   Order[]
+  cartItem CartItem[]
+}
+
+model Category {
+  id      Int    @id @default(autoincrement())
+  name    String
+
+  // Relationship reff
+  product Product[]
 }
 
 model Product {
-  id          Int      @id @default(autoincrement())
+  id          Int           @id @default(autoincrement())
   name        String
   price       Float
   description String
 
+  categoryId  Int?          // Foreign key to Category
+  category    Category?     @relation(fields: [categoryId], references: [id])
+
   // Relationship reff
   orderItems  OrderItem[]
+  cartItem CartItem[]
 }
 
 model Order {
   id          Int      @id @default(autoincrement())
-  userId      Int
   totalAmount Float
   status      String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  // Relationships
+  userId      Int      // Foreign key to User
   user        User     @relation(fields: [userId], references: [id])
 
   // Relationship reff
@@ -48,12 +60,25 @@ model Order {
 
 model OrderItem {
   id         Int     @id @default(autoincrement())
-  orderId    Int
-  productId  Int
   quantity   Int
   subtotal   Float
   
-  // Relationships
+  orderId    Int     // Foreign key to Order
   order      Order   @relation(fields: [orderId], references: [id])
+
+  productId  Int     // Foreign key to Product
   product    Product @relation(fields: [productId], references: [id])
+}
+
+model CartItem {
+  quantity   Int
+  
+  userId     Int       // Foreign key to User
+  user       User      @relation(fields: [userId], references: [id])
+
+  productId  Int       // Foreign key to Product
+  product    Product   @relation(fields: [productId], references: [id])
+
+  // Composite primary key
+  @@id([productId, userId])
 }
