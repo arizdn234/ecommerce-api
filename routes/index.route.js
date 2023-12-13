@@ -1,3 +1,5 @@
+const OrderController = require('../controllers/order.controller');
+const PaymentController = require('../controllers/payment.controller');
 const productController = require('../controllers/product.controller');
 const userController = require('../controllers/user.controller');
 const Authorization = require('../middlewares/authorization.middleware');
@@ -8,7 +10,7 @@ const router = require('express').Router();
 router.post('/user/register', userController.register)
 router.post('/user/login', userController.login)
 
-// --------===<{([user CRUD])}>===--------
+// --------===<{([user Routes])}>===--------
 // ___[Read]___
 router.get(
     '/api/admin/users',
@@ -50,7 +52,7 @@ router.delete(
     userController.deleteUserByID
 )
 
-// --------===<{([product CRUD])}>===--------
+// --------===<{([product Routes])}>===--------
 // ___[Read]___
 router.get(
     '/api/products', 
@@ -80,20 +82,86 @@ router.delete(
     productController.deleteProductByID
 )
 
-// --------===<{([order CRUD])}>===--------
-// order CRUD *need spesify userID
-// router.get('/api/orders',)
-// router.get('/api/orders/:id', )
-// router.post('/api/orders', )
-// router.put('/api/orders/:id', )
-// router.delete('/api/orders/:id', )
+// --------===<{([order Routes])}>===--------
+// order Routes *need spesify userID
+// ___[Create]___
+router.post(
+    '/api/orders',
+    Authorization.authorizationCustomer,
+    OrderController.createOrder
+)
+router.post(
+    '/api/admin/orders',
+    Authorization.authorizationAdmin,
+    OrderController.createOrder
+)
+// ___[Read by order ID]___
+router.get(
+    '/api/orders/:id', 
+    Authorization.authorizationCustomer,
+    OrderController.getOrderById
+)
+router.get(
+    '/api/admin/orders/:id', 
+    Authorization.authorizationAdmin,
+    OrderController.getOrderById
+)
+// ___[Read by user ID]___
+router.get(
+    '/api/orders/users/:userId', 
+    Authorization.authorizationCustomer,
+    OrderController.getOrderByUserId
+)
+router.get(
+    '/api/admin/orders/users/:userId', 
+    Authorization.authorizationAdmin,
+    OrderController.getOrderByUserId
+)
+// ___[Update]___
+router.put(
+    '/api/admin/orders/:id', 
+    Authorization.authorizationAdmin,
+    OrderController.updateOrder
+)
+// ___[Delete]___
+router.delete(
+    '/api/admin/orders/:id', 
+    Authorization.authorizationAdmin,
+    OrderController.deleteOrder
+)
 
-// --------===<{([orderItem CRUD])}>===--------
-// orderItem CRUD
-// router.get('/api/orderItems',)
-// router.get('/api/orderItems/:id', )
-// router.post('/api/orderItems', )
-// router.put('/api/orderItems/:id', )
-// router.delete('/api/orderItems/:id', )
+// --------===<{([Payment Routes])}>===--------
+router.post(
+    '/api/payment',
+    Authorization.authorizationCustomer,
+    PaymentController.processPayment
+)
+router.post(
+    '/api/admin/payment',
+    Authorization.authorizationAdmin,
+    PaymentController.processPayment
+)
+
+// --------===<{([Search Routes])}>===--------
+router.get(
+    '/api/search?q=:query',
+)
+router.get(
+    '/api/products/category/:category',
+)
+
+// --------===<{([Cart Routes])}>===--------
+router.get(
+    '/api/cart',
+)
+router.post(
+    '/api/cart/add',
+)
+router.put(
+    '/api/cart/update/:productId',
+)
+router.delete(
+    '/api/cart/remove/:productId',
+)
 
 module.exports = router
