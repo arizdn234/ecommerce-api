@@ -75,23 +75,30 @@ Berikut adalah beberapa endpoint API yang tersedia:
 | DELETE | `/api/admin/users/:id` | Delete pengguna | admin |
 
 ### **Pengelolaan Pesanan:**
-under maintaince
-  - `POST /orders`
-  - `GET /orders/:id`
-  - `GET /orders/user/:userId`
-  - `PUT /orders/:id`
+| Method | Path | Response | Auth |
+| --- | --- | --- | --- |
+| POST | `/api/orders` | Create pesanan | customer |
+| POST | `/api/admin/orders` | Create pesanan | admin |
+| GET | `/api/orders/:id` | Get pesanan berdasarkan ID pesanan | customer |
+| GET | `/api/admin/orders/:id` | Get pesanan berdasarkan ID pesanan | admin |
+| GET | `/api/orders/users/:id` | Get pesanan berdasarkan ID pengguna | customer |
+| GET | `/api/admin/orders/users/:id` | Get pesanan berdasarkan ID pengguna | admin |
+| PUT | `/api/admin/orders/:id` | Update pesanan | admin |
+| DELETE | `/api/admin/orders/:id` | Delete pesanan | admin |
 
 ### **Pembayaran:**
-under maintaince
-  - `POST /payment`
+| Method | Path | Response | Auth |
+| --- | --- | --- | --- |
+| POST | `/api/payment` | Approve pembayaran | customer |
+| POST | `/api/admin/payment` | Approve pembayaran | customer |
 
 ### **Pencarian dan Filter:**
-under maintaince
+under maintainance
   - `GET /search?q=:query`
   - `GET /products/category/:category`
 
 ### **Manajemen Keranjang Belanja:**
-under maintaince
+under maintainance
   - `GET /cart`
   - `POST /cart/add`
   - `PUT /cart/update/:productId`
