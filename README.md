@@ -1,6 +1,8 @@
 
 # Back-end e-commerce sederhana menggunakan Node.js, Prisma, Express, dan PostgreSQL.
-Studi kasus aplikasi e-commerce B2C (Business-to-Consumer) dapat mencakup berbagai aspek, termasuk manajemen produk, data pengguna, otentikasi pengguna, keranjang belanja, pemrosesan pembayaran, dan lainnya.
+Studi kasus aplikasi e-commerce B2C (Business-to-Consumer) dapat mencakup berbagai aspek, termasuk manajemen produk, data pengguna, otentikasi pengguna, keranjang belanja, pemrosesan pembayaran, dan lainnya.<br> 
+> **Objektif** <br> 
+> Mencapai integrasi penuh dan keseluruhan antara aplikasi end-user, Admin Panel, pembangunan API, dan konsumsi API.
 
 ## Instalasi
 
