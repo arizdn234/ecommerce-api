@@ -44,6 +44,7 @@ Studi kasus aplikasi e-commerce B2C (Business-to-Consumer) dapat mencakup berbag
 
 Aplikasi akan berjalan di `http://localhost:3000`. Bisa dirubah sesuai port yang tersedia pada variabel PORT = 3000 file index.js 
 
+# Dokumentasi
 ## Endpoint API
 
 Berikut adalah beberapa endpoint API yang tersedia:
@@ -93,12 +94,12 @@ Berikut adalah beberapa endpoint API yang tersedia:
 | POST | `/api/admin/payment` | Approve pembayaran | customer |
 
 ### **Pencarian dan Filter:**
-under maintainance
+under maintenance
   - `GET /search?q=:query`
   - `GET /products/category/:category`
 
 ### **Manajemen Keranjang Belanja:**
-under maintainance
+under maintenance
   - `GET /cart`
   - `POST /cart/add`
   - `PUT /cart/update/:productId`
