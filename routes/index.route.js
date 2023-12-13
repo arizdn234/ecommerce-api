@@ -1,3 +1,4 @@
+const DefaultController = require('../controllers/default.controller');
 const OrderController = require('../controllers/order.controller');
 const PaymentController = require('../controllers/payment.controller');
 const productController = require('../controllers/product.controller');
@@ -5,6 +6,9 @@ const userController = require('../controllers/user.controller');
 const Authorization = require('../middlewares/authorization.middleware');
 
 const router = require('express').Router();
+
+// Landing Pages
+router.get('/', DefaultController.landingPage)
 
 // user login register
 router.post('/user/register', userController.register)
@@ -145,23 +149,29 @@ router.post(
 // --------===<{([Search Routes])}>===--------
 router.get(
     '/api/search?q=:query',
+    DefaultController.underMaintenance
 )
 router.get(
     '/api/products/category/:category',
+    DefaultController.underMaintenance
 )
 
 // --------===<{([Cart Routes])}>===--------
 router.get(
     '/api/cart',
+    DefaultController.underMaintenance
 )
 router.post(
     '/api/cart/add',
+    DefaultController.underMaintenance
 )
 router.put(
     '/api/cart/update/:productId',
+    DefaultController.underMaintenance
 )
 router.delete(
     '/api/cart/remove/:productId',
+    DefaultController.underMaintenance
 )
 
 module.exports = router
