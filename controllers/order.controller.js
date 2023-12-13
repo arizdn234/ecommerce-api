@@ -1,23 +1,38 @@
 const { PrismaClient } = require('@prisma/client');
+const { verifyToken } = require('../helpers/jwt.helper');
 const Order = new PrismaClient().order;
 
 class OrderController {
     static async createOrder(req, res) {
         try {
-            const { userId, totalAmount, status, orderItems } = req.body;
+            const accessToken = req.headers["access-token"]
+            const decoded = verifyToken(accessToken)
+            const { status, orderItems } = req.body;
+            
+            const totalAmount = orderItems.reduce((total, item) => {
+                return total + item.quantity * item.price;
+            }, 0);
+    
             const newOrder = await Order.create({
                 data: {
-                    userId,
+                    userId: decoded.id,
                     totalAmount,
-                    status,
+                    status: "pending",
                     orderItems: {
-                        create: orderItems,
+                        create: orderItems.map(item => ({
+                            quantity: item.quantity,
+                            subtotal: item.quantity * item.price,
+                            product: {
+                                connect: { id: item.productId }
+                            },
+                        })),
                     },
                 },
                 include: {
                     orderItems: true,
                 },
             });
+            
             res.status(201).json(newOrder);
         } catch (error) {
             console.error(error);
@@ -76,6 +91,32 @@ class OrderController {
         } catch (error) {
             console.error(error);
             res.status(500).json({ error: 'Internal Server Error' });
+        }
+    }
+
+    static async deleteOrder (req, res) {
+        try {
+            const OrderID = req.params.id
+            if (!await Order.findUnique({ where: { id: parseInt(OrderID) }})) {
+                return res.status(404).json({
+                    status: 'failed',
+                    message: 'Order not found'
+                })
+            }
+            const deletedOrder = await Order.delete({
+                where: { id: parseInt(OrderID) },
+            })
+
+            res.status(200).json({
+                status: 'success',
+                message: 'Successfully deleted',
+                data: deletedOrder
+            })
+        } catch (error) {
+            res.status(400).json({
+                status: 'failed',
+                message: error.message
+            })
         }
     }
 }
