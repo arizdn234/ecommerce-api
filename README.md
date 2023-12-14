@@ -57,6 +57,11 @@ Berikut adalah beberapa endpoint API yang tersedia:
 >
 > - Jika autentikasi diperlukan, sertakan header: { 'access-token': 'YOUR_ACCESS_TOKEN' }.
 
+<hr>
+<hr>
+<hr>
+<hr>
+
 #### **Contoh request**
 
 ```javascript
@@ -98,6 +103,22 @@ if (storedAccessToken) {
 ```
 
 #### **Response**
+```json
+{
+	status: 'success',
+	message: 'Successfully deleted',
+	data: {
+		"name": "Modern college eyeglass",
+		"price": 65000,
+		"description": "This is blablabla..."
+	}
+}
+```
+
+<hr>
+<hr>
+<hr>
+<hr>
 
 ### **Sistem Login**
 
@@ -132,8 +153,8 @@ if (storedAccessToken) {
 
 | Method | Path                          | Request                                                          | Response                            | Auth     |
 | ------ | ----------------------------- | ---------------------------------------------------------------- | ----------------------------------- | -------- |
-| POST   | `/api/orders`                 | { `orderItems`: [{ `quantity`, `price`, `productId` }, {}, {}] } | Create pesanan                      | customer |
-| POST   | `/api/admin/orders`           | { `orderItems`: [{ `quantity`, `price`, `productId` }, {}, {}] } | Create pesanan                      | admin    |
+| POST   | `/api/orders`                 | { `orderItems`: [{ `quantity`, `price`, `productId` }] } | Create pesanan                      | customer |
+| POST   | `/api/admin/orders`           | { `orderItems`: [{ `quantity`, `price`, `productId` }] } | Create pesanan                      | admin    |
 | GET    | `/api/orders/:id`             | -                                                                | Get pesanan berdasarkan ID pesanan  | customer |
 | GET    | `/api/admin/orders/:id`       | -                                                                | Get pesanan berdasarkan ID pesanan  | admin    |
 | GET    | `/api/orders/users/:id`       | -                                                                | Get pesanan berdasarkan ID pengguna | customer |
