@@ -2,6 +2,7 @@ const DefaultController = require('../controllers/default.controller');
 const OrderController = require('../controllers/order.controller');
 const PaymentController = require('../controllers/payment.controller');
 const productController = require('../controllers/product.controller');
+const SearchController = require('../controllers/search.controller');
 const userController = require('../controllers/user.controller');
 const Authorization = require('../middlewares/authorization.middleware');
 
@@ -149,11 +150,11 @@ router.post(
 // --------===<{([Search Routes])}>===--------
 router.get(
     '/api/search?q=:query',
-    DefaultController.underMaintenance
+    SearchController.searchProducts
 )
 router.get(
     '/api/products/category/:category',
-    DefaultController.underMaintenance
+    SearchController.filterProductsByCategory
 )
 
 // --------===<{([Cart Routes])}>===--------
