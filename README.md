@@ -103,7 +103,8 @@ if (storedAccessToken) {
 ```
 
 #### **Response**
-```json
+
+```javascript
 {
 	status: 'success',
 	message: 'Successfully deleted',
@@ -151,16 +152,16 @@ if (storedAccessToken) {
 
 ### **Pengelolaan Pesanan:**
 
-| Method | Path                          | Request                                                          | Response                            | Auth     |
-| ------ | ----------------------------- | ---------------------------------------------------------------- | ----------------------------------- | -------- |
+| Method | Path                          | Request                                                  | Response                            | Auth     |
+| ------ | ----------------------------- | -------------------------------------------------------- | ----------------------------------- | -------- |
 | POST   | `/api/orders`                 | { `orderItems`: [{ `quantity`, `price`, `productId` }] } | Create pesanan                      | customer |
 | POST   | `/api/admin/orders`           | { `orderItems`: [{ `quantity`, `price`, `productId` }] } | Create pesanan                      | admin    |
-| GET    | `/api/orders/:id`             | -                                                                | Get pesanan berdasarkan ID pesanan  | customer |
-| GET    | `/api/admin/orders/:id`       | -                                                                | Get pesanan berdasarkan ID pesanan  | admin    |
-| GET    | `/api/orders/users/:id`       | -                                                                | Get pesanan berdasarkan ID pengguna | customer |
-| GET    | `/api/admin/orders/users/:id` | -                                                                | Get pesanan berdasarkan ID pengguna | admin    |
-| PUT    | `/api/admin/orders/:id`       | { `status` }                                                     | Update pesanan                      | admin    |
-| DELETE | `/api/admin/orders/:id`       | -                                                                | Delete pesanan                      | admin    |
+| GET    | `/api/orders/:id`             | -                                                        | Get pesanan berdasarkan ID pesanan  | customer |
+| GET    | `/api/admin/orders/:id`       | -                                                        | Get pesanan berdasarkan ID pesanan  | admin    |
+| GET    | `/api/orders/users/:id`       | -                                                        | Get pesanan berdasarkan ID pengguna | customer |
+| GET    | `/api/admin/orders/users/:id` | -                                                        | Get pesanan berdasarkan ID pengguna | admin    |
+| PUT    | `/api/admin/orders/:id`       | { `status` }                                             | Update pesanan                      | admin    |
+| DELETE | `/api/admin/orders/:id`       | -                                                        | Delete pesanan                      | admin    |
 
 ### **Pembayaran:**
 
@@ -184,4 +185,3 @@ if (storedAccessToken) {
 | POST   | `/api/cart/add`               | { `productId`, `quantity` } | Insert produk ke keranjang belanja | costumer |
 | PUT    | `/api/cart/update/:productId` | { `quantity` }              | Update produk di keranjang belanja | costumer |
 | DELETE | `/api/cart/remove/:productId` | -                           | Delete produk di keranjang belanja | costumer |
-
