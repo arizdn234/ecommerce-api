@@ -1,3 +1,4 @@
+const CartController = require('../controllers/cart.controller');
 const DefaultController = require('../controllers/default.controller');
 const OrderController = require('../controllers/order.controller');
 const PaymentController = require('../controllers/payment.controller');
@@ -160,19 +161,23 @@ router.get(
 // --------===<{([Cart Routes])}>===--------
 router.get(
     '/api/cart',
-    DefaultController.underMaintenance
+    Authorization.authorizationCustomer,
+    CartController.getCart
 )
 router.post(
     '/api/cart/add',
-    DefaultController.underMaintenance
+    Authorization.authorizationCustomer,
+    CartController.addToCart
 )
 router.put(
     '/api/cart/update/:productId',
-    DefaultController.underMaintenance
+    Authorization.authorizationCustomer,
+    CartController.updateCartItem
 )
 router.delete(
     '/api/cart/remove/:productId',
-    DefaultController.underMaintenance
+    Authorization.authorizationCustomer,
+    CartController.removeCartItem
 )
 
 module.exports = router
