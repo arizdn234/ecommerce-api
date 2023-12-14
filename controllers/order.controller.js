@@ -7,7 +7,7 @@ class OrderController {
         try {
             const accessToken = req.headers["access-token"]
             const decoded = verifyToken(accessToken)
-            const { status, orderItems } = req.body;
+            const { orderItems } = req.body;
             
             const totalAmount = orderItems.reduce((total, item) => {
                 return total + item.quantity * item.price;
