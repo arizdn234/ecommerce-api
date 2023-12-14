@@ -79,26 +79,26 @@ const storedAccessToken = localStorage.getItem("access-token");
 if (storedAccessToken) {
   // Lakukan permintaan API dengan menyertakan access token
   fetch(apiUrl, {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-      "access-token": storedAccessToken,
-    },
+		method: "DELETE",
+		headers: {
+			"Content-Type": "application/json",
+			"access-token": storedAccessToken,
+		},
   })
     .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      return response.json();
+		if (!response.ok) {
+			throw new Error("Network response was not ok");
+		}
+		return response.json();
     })
     .then((data) => {
-      console.log("Delete successful:", data);
+      	console.log("Delete successful:", data);
     })
     .catch((error) => {
-      console.error("Error deleting:", error.message);
+      	console.error("Error deleting:", error.message);
     });
 } else {
-  console.error("Access token not available. User may not be logged in.");
+  	console.error("Access token not available. User may not be logged in.");
 }
 ```
 
