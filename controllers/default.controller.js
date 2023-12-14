@@ -10,7 +10,7 @@ class DefaultController {
 
     static async landingPage(req, res) {
         try {
-            res.status(200).json({ message: `Visit the API documentation at https://github.com/arizdn234/ecommerce-api?tab=readme-ov-file#dokumentasi.` });
+            res.status(200).json({ message: `Visit the API documentation at https://github.com/arizdn234/ecommerce-api#dokumentasi.` });
         } catch (error) {
             console.error(error);
             res.status(500).json({ error: 'Internal Server Error' });
