@@ -106,13 +106,13 @@ if (storedAccessToken) {
 
 ```javascript
 {
-	status: 'success',
-	message: 'Successfully deleted',
-	data: {
-		"name": "Modern college eyeglass",
-		"price": 65000,
-		"description": "This is blablabla..."
-	}
+  status: 'success',
+  message: 'Successfully deleted',
+  data: {
+    "name": "Modern college eyeglass",
+    "price": 65000,
+    "description": "This is blablabla..."
+  }
 }
 ```
 
