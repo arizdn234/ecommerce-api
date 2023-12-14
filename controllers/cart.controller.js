@@ -84,10 +84,12 @@ class CartController {
 
 	static async removeCartItem(req, res) {
 		try {
+			const accessToken = req.headers["access-token"]
+			const decoded = verifyToken(accessToken)
 			const { productId } = req.params;
 
 			await CartItems.delete({
-				where: { productId_userId: { productId: parseInt(productId), userId: req.user.id } },
+				where: { productId_userId: { productId: parseInt(productId), userId: decoded.id} },
 			});
 
 			res.json({
